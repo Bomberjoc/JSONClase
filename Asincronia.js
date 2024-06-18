@@ -67,25 +67,48 @@
 // })
 
 
-// fetch('https://jsonplaceholder.typicode.com/todos/1')
-//       .then(response => response.json())
-//       .then(json => console.log(json.title))
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => console.log(json.title))
 
-//       let url = 'https://jsonplaceholder.typicode.com/todos/1';
-//       async function json(url){
-//         return new Promise(function(resolve,reject){
-//                     resolve(url)
-//                 })
-//       }
+      let url = 'https://jsonplaceholder.typicode.com/todos/1';
+      async function json(url){
+        return new Promise(function(resolve,reject){
+                    resolve(url)
+                })
+      }
 
-//       async function main(params) {
-//         let json = await json(url)
-//         console.log(json);
-//       }
+      async function main(params) {
+        let json = await json(url)
+        console.log(json);
+      }
+
     async function hacer(){
         let url1 = await (await fetch('https://jsonplaceholder.typicode.com/todos/1')).json()
         console.log(url1);
         console.log(url1.title);
     }
     hacer();
+
+    function fetchData(callback) {
+        fetch('https://jsonplaceholder.typicode.com/todos/1')
+            .then(response => response.json())
+            .then(data => callback(null, data))
+            .catch(error => callback(error, null));
+    }
     
+    fetchData((error, data) => {
+        if (error) {
+            console.error('Error:', error);
+        } else {
+            console.log(data.id);
+        }
+    });
+
+    function queso(hamburguesa) {
+        let pipi = "Ayyy"
+        hamburguesa(pipi)
+    }
+    queso((nose)=>{
+        console.log(nose);
+    })
